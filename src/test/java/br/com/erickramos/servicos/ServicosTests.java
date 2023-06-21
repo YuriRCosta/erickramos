@@ -7,8 +7,7 @@ import br.com.erickramos.model.dto.ServicoDTO;
 import br.com.erickramos.repository.ServicoRepository;
 import br.com.erickramos.service.ServicosService;
 import com.github.dozermapper.core.MappingException;
-import org.junit.Assert;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -16,8 +15,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest
 class ServicosTests {
@@ -28,13 +29,13 @@ class ServicosTests {
     @InjectMocks
     private ServicosService servicoService;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
     }
 
     @Test
-    public void testCriarNovoServico() throws ExceptionErickRamos, MappingException {
+    void testCriarNovoServico() throws ExceptionErickRamos, MappingException {
         // Dados de entrada
         ServicoDTO servico = new ServicoDTO();
         servico.setNome("Serviço A");
@@ -50,12 +51,12 @@ class ServicosTests {
         ServicoDTO result = servicoService.criarNovoServico(servico);
 
         // Verificar o resultado
-        Assert.assertEquals("Serviço A", result.getNome());
-        Assert.assertEquals(10.0, result.getPreco(), 0.001);
+        assertEquals("Serviço A", result.getNome());
+        assertEquals(10.0, result.getPreco(), 0.001);
     }
 
     @Test
-    public void testCriarNovoServicoComNomeVazio() {
+    void testCriarNovoServicoComNomeVazio() {
         // Arrange
         ServicoDTO servico = new ServicoDTO();
         servico.setNome("");
@@ -73,7 +74,7 @@ class ServicosTests {
     }
 
     @Test
-    public void testCriarNovoServicoComPrecoNegativo() {
+    void testCriarNovoServicoComPrecoNegativo() {
         // Arrange
         ServicoDTO servico = new ServicoDTO();
         servico.setNome("Teste Servico");
@@ -91,7 +92,7 @@ class ServicosTests {
     }
 
     @Test
-    public void testCriarNovoServicoComNomeExistente() throws ExceptionErickRamos {
+    void testCriarNovoServicoComNomeExistente() throws ExceptionErickRamos {
         // Arrange
         ServicoDTO servico = new ServicoDTO();
         servico.setNome("Teste Servico");
