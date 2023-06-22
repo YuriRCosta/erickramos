@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -17,12 +18,23 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import javax.validation.ConstraintViolationException;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 @RestControllerAdvice
 public class ControleExcecoes extends ResponseEntityExceptionHandler {
 
     private final String SETA = " --> ";
+
+    @ExceptionHandler(AuthenticationException.class)
+    public final ResponseEntity<ExceptionResponse> handleAuthenticationExceptions(Exception ex, WebRequest request) {
+        ExceptionResponse exceptionResponse = new ExceptionResponse(
+                new Date(),
+                ex.getMessage(),
+                request.getDescription(false)
+        );
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.FORBIDDEN);
+    }
 
     @ExceptionHandler(ExceptionErickRamos.class)
     public ResponseEntity<Object> handleExceptionCustom(ExceptionErickRamos ex) {

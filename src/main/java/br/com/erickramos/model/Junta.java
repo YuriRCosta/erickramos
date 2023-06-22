@@ -5,25 +5,27 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity
-public class Servico implements Serializable {
+@Table(name = "juntas")
+public class Junta implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
-    private String nome;
+    @Column(nullable = false)
+    private String cabecotes;
 
     @Column(nullable = false)
     private Double preco;
 
-    public Servico() {
+    private Integer qtdEstoque = 1;
+
+    public Integer getQtdEstoque() {
+        return qtdEstoque;
     }
 
-    public Servico(Long id, String nome, Double preco) {
-        this.id = id;
-        this.nome = nome;
-        this.preco = preco;
+    public void setQtdEstoque(Integer qtdEstoque) {
+        this.qtdEstoque = qtdEstoque;
     }
 
     public Long getId() {
@@ -34,12 +36,12 @@ public class Servico implements Serializable {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getCabecotes() {
+        return cabecotes;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setCabecotes(String cabecotes) {
+        this.cabecotes = cabecotes;
     }
 
     public Double getPreco() {

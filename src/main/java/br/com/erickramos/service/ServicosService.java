@@ -67,8 +67,7 @@ public class ServicosService {
         if (servico.getPreco() == null || servico.getPreco() < 0) {
             throw new ExceptionErickRamos("Preço do serviço não pode ser negativo");
         }
-        if (repository.buscarPorNome(servico.getNome()) != null) {
+        if (!repository.buscarPorNome(servico.getNome()).isEmpty())
             throw new ExceptionErickRamos("Já existe um serviço com esse nome");
-        }
     }
 }
