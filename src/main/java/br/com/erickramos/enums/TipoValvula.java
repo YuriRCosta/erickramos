@@ -11,6 +11,11 @@ public enum TipoValvula {
         this.descricao = descricao;
     }
 
+    @Override
+    public String toString() {
+        return this.descricao;
+    }
+
     public String getDescricao() {
         return descricao;
     }

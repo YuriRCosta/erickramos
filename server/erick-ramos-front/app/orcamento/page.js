@@ -1,28 +1,23 @@
 'use client'
 
 import React, {useEffect, useState} from "react";
-import ModalRetentorComando from "../../components/ModalRetentorComando";
+import ModalCabecote from "../../components/ModalCabecote";
 import Api from "../../services/api";
 import Navbar from "../../components/Navbar";
 
-export default function RetentorComando() {
-    const [retentoresComando, setRetentoresComando] = useState([]);
+export default function Cabecote() {
+    const [cabecotes, setRetentoresComando] = useState([]);
 
     const username = localStorage.getItem('username');
     const accessToken = localStorage.getItem('accessToken');
 
-    const adicionarRetentoresComando = (novoSelo) => {
-        setRetentoresComando([...retentoresComando, novoSelo]);
-    };
-
     const handleSave = async (formData) => {
         try {
-            const response = await Api.post('/retentorComando', formData, {
+            const response = await Api.post('/cabecote', formData, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`
                 },
             }); // Substitua pelo endpoint correto da sua API
-            adicionarRetentoresComando(response.data);
             closeModal();
         } catch (error) {
             console.error(error);
@@ -30,7 +25,7 @@ export default function RetentorComando() {
     };
 
     async function fetchMoreBooks() {
-        const response = await Api.get('retentorComando', {
+        const response = await Api.get('cabecote', {
             headers: {
                 Authorization: `Bearer ${accessToken}`
             },
@@ -56,24 +51,24 @@ export default function RetentorComando() {
         <div>
             <Navbar />
             <div className="flex items-center bg-white justify-center h-screen">
-                <div className="max-w-md w-full p-6 bg-neutral-500 rounded-lg shadow-md text-center">
-                    <h1 className="text-2xl font-semibold mb-4">Retentores de Comando</h1>
+                <div className="max-w-md w-full p-6 bg-neutral-500 shadow-2xl rounded-lg shadow-md text-center">
+                    <h1 className="text-2xl font-semibold mb-4">Cabecotes</h1>
 
                     {/* Tabela */}
                     <table className="w-full">
                         <thead>
                         <tr>
-                            <th className="py-2 text-center px-4 border-b">Retentor</th>
-                            <th className="py-2 text-center px-4 border-b">Preco</th>
-                            <th className="py-2 text-center px-4 border-b">Qtd Estoque</th>
+                            <th className="py-2 text-center px-4 border-b">Cabecote</th>
+                            <th className="py-2 text-center px-4 border-b">Qtd Valvulas</th>
+                            <th className="py-2 text-center px-4 border-b">Material</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {retentoresComando.map((retentor) => (
+                        {cabecotes.map((retentor) => (
                             <tr key={retentor.id}>
                                 <td className="py-2 text-center px-4 border-b">{retentor.nome}</td>
-                                <td className="py-2 text-center px-4 border-b">R$ {retentor.preco}</td>
-                                <td className="py-2 text-center px-4 border-b">{retentor.qtdEstoque}</td>
+                                <td className="py-2 text-center px-4 border-b">{retentor.qtdValvulas}V</td>
+                                <td className="py-2 text-center px-4 border-b">{retentor.material}</td>
                             </tr>
                         ))}
                         </tbody>
@@ -85,9 +80,9 @@ export default function RetentorComando() {
                     >
                         Salvar Novo
                     </button>
-                    {/* ModalRetentorComando */}
+                    {/* ModalCabecote */}
                     {isModalOpen && (
-                        <ModalRetentorComando closeModal={closeModal} handleSave={handleSave} />
+                        <ModalCabecote closeModal={closeModal} handleSave={handleSave} />
                     )}
                 </div>
             </div>

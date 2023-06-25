@@ -1,28 +1,28 @@
 'use client'
 
 import React, {useEffect, useState} from "react";
-import ModalRetentorComando from "../../components/ModalRetentorComando";
+import ModalJunta from "../../components/ModalJunta";
 import Api from "../../services/api";
 import Navbar from "../../components/Navbar";
 
-export default function RetentorComando() {
-    const [retentoresComando, setRetentoresComando] = useState([]);
+export default function Junta() {
+    const [juntas, setJuntas] = useState([]);
 
     const username = localStorage.getItem('username');
     const accessToken = localStorage.getItem('accessToken');
 
-    const adicionarRetentoresComando = (novoSelo) => {
-        setRetentoresComando([...retentoresComando, novoSelo]);
+    const adicionarJunta = (novoSelo) => {
+        setJuntas([...juntas, novoSelo]);
     };
 
     const handleSave = async (formData) => {
         try {
-            const response = await Api.post('/retentorComando', formData, {
+            const response = await Api.post('/junta', formData, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`
                 },
             }); // Substitua pelo endpoint correto da sua API
-            adicionarRetentoresComando(response.data);
+            adicionarJunta(response.data);
             closeModal();
         } catch (error) {
             console.error(error);
@@ -30,12 +30,12 @@ export default function RetentorComando() {
     };
 
     async function fetchMoreBooks() {
-        const response = await Api.get('retentorComando', {
+        const response = await Api.get('junta', {
             headers: {
                 Authorization: `Bearer ${accessToken}`
             },
         })
-        setRetentoresComando(response.data);
+        setJuntas(response.data);
     }
 
     useEffect(() => {
@@ -57,7 +57,7 @@ export default function RetentorComando() {
             <Navbar />
             <div className="flex items-center bg-white justify-center h-screen">
                 <div className="max-w-md w-full p-6 bg-neutral-500 rounded-lg shadow-md text-center">
-                    <h1 className="text-2xl font-semibold mb-4">Retentores de Comando</h1>
+                    <h1 className="text-2xl font-semibold mb-4">Juntas</h1>
 
                     {/* Tabela */}
                     <table className="w-full">
@@ -69,7 +69,7 @@ export default function RetentorComando() {
                         </tr>
                         </thead>
                         <tbody>
-                        {retentoresComando.map((retentor) => (
+                        {juntas.map((retentor) => (
                             <tr key={retentor.id}>
                                 <td className="py-2 text-center px-4 border-b">{retentor.nome}</td>
                                 <td className="py-2 text-center px-4 border-b">R$ {retentor.preco}</td>
@@ -85,9 +85,9 @@ export default function RetentorComando() {
                     >
                         Salvar Novo
                     </button>
-                    {/* ModalRetentorComando */}
+                    {/* ModalJunta */}
                     {isModalOpen && (
-                        <ModalRetentorComando closeModal={closeModal} handleSave={handleSave} />
+                        <ModalJunta closeModal={closeModal} handleSave={handleSave} />
                     )}
                 </div>
             </div>

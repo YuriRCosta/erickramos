@@ -17,12 +17,13 @@ public class Valvula implements Serializable {
     private String nome;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private TipoValvula tipo;
 
     @Column(nullable = false)
     private Double preco;
 
-    private Long codigo;
+    private String codigo;
 
     private Integer qtdEstoque;
 
@@ -69,11 +70,11 @@ public class Valvula implements Serializable {
         this.preco = preco;
     }
 
-    public Long getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(Long codigo) {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 

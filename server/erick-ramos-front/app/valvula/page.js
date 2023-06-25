@@ -1,28 +1,28 @@
 'use client'
 
 import React, {useEffect, useState} from "react";
-import ModalRetentorComando from "../../components/ModalRetentorComando";
+import ModalValvula from "../../components/ModalValvula";
 import Api from "../../services/api";
 import Navbar from "../../components/Navbar";
 
-export default function RetentorComando() {
-    const [retentoresComando, setRetentoresComando] = useState([]);
+export default function Valvula() {
+    const [valvulas, setValvulas] = useState([]);
 
     const username = localStorage.getItem('username');
     const accessToken = localStorage.getItem('accessToken');
 
-    const adicionarRetentoresComando = (novoSelo) => {
-        setRetentoresComando([...retentoresComando, novoSelo]);
+    const adicionarRetentoresValvula = (novoSelo) => {
+        setValvulas([...valvulas, novoSelo]);
     };
 
     const handleSave = async (formData) => {
         try {
-            const response = await Api.post('/retentorComando', formData, {
+            const response = await Api.post('/valvula', formData, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`
                 },
             }); // Substitua pelo endpoint correto da sua API
-            adicionarRetentoresComando(response.data);
+            adicionarRetentoresValvula(response.data);
             closeModal();
         } catch (error) {
             console.error(error);
@@ -30,12 +30,12 @@ export default function RetentorComando() {
     };
 
     async function fetchMoreBooks() {
-        const response = await Api.get('retentorComando', {
+        const response = await Api.get('valvula', {
             headers: {
                 Authorization: `Bearer ${accessToken}`
             },
         })
-        setRetentoresComando(response.data);
+        setValvulas(response.data);
     }
 
     useEffect(() => {
@@ -56,8 +56,8 @@ export default function RetentorComando() {
         <div>
             <Navbar />
             <div className="flex items-center bg-white justify-center h-screen">
-                <div className="max-w-md w-full p-6 bg-neutral-500 rounded-lg shadow-md text-center">
-                    <h1 className="text-2xl font-semibold mb-4">Retentores de Comando</h1>
+                <div className="max-w-2xl w-full p-8 bg-neutral-500 rounded-lg shadow-md text-center">
+                    <h1 className="text-2xl font-semibold mb-4">Valvulas</h1>
 
                     {/* Tabela */}
                     <table className="w-full">
@@ -66,14 +66,18 @@ export default function RetentorComando() {
                             <th className="py-2 text-center px-4 border-b">Retentor</th>
                             <th className="py-2 text-center px-4 border-b">Preco</th>
                             <th className="py-2 text-center px-4 border-b">Qtd Estoque</th>
+                            <th className="py-2 text-center px-4 border-b">Tipo</th>
+                            <th className="py-2 text-center px-4 border-b">Codigo</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {retentoresComando.map((retentor) => (
+                        {valvulas.map((retentor) => (
                             <tr key={retentor.id}>
                                 <td className="py-2 text-center px-4 border-b">{retentor.nome}</td>
                                 <td className="py-2 text-center px-4 border-b">R$ {retentor.preco}</td>
                                 <td className="py-2 text-center px-4 border-b">{retentor.qtdEstoque}</td>
+                                <td className="py-2 text-center px-4 border-b">{retentor.tipo}</td>
+                                <td className="py-2 text-center px-4 border-b">{retentor.codigo}</td>
                             </tr>
                         ))}
                         </tbody>
@@ -85,9 +89,9 @@ export default function RetentorComando() {
                     >
                         Salvar Novo
                     </button>
-                    {/* ModalRetentorComando */}
+                    {/* ModalValvula */}
                     {isModalOpen && (
-                        <ModalRetentorComando closeModal={closeModal} handleSave={handleSave} />
+                        <ModalValvula closeModal={closeModal} handleSave={handleSave} />
                     )}
                 </div>
             </div>

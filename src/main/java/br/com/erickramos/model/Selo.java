@@ -20,6 +20,16 @@ public class Selo implements Serializable {
 
     private Integer qtdEstoque = 0;
 
+    private String medida;
+
+    public String getMedida() {
+        return medida;
+    }
+
+    public void setMedida(String medida) {
+        this.medida = medida;
+    }
+
     public Long getId() {
         return id;
     }

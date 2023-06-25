@@ -13,6 +13,7 @@ public class Cabecote implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Enumerated(EnumType.STRING)
     private MaterialCabecote material;
 
     @Column(nullable = false)

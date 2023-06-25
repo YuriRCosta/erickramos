@@ -1,13 +1,25 @@
 'use client'
 
 import React, { useState } from 'react';
+import Select from "react-select";
 
-const Modal = ({ closeModal, handleSave }) => {
+const ModalValvula = ({ closeModal, handleSave }) => {
     const [formData, setFormData] = useState({
         nome: '',
         preco: '',
         qtdEstoque: '',
+        tipo: '',
+        codigo: '',
     });
+
+    const tipoValvulaOptions = [
+        { value: 'ESCAPE', label: 'Escape' },
+        { value: 'ADMISSAO', label: 'Admissão' },
+    ];
+
+    const handleTipoValvulaChange = (selectedOption) => {
+        setFormData({ ...formData, tipoValvula: selectedOption.value });
+    };
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -36,7 +48,7 @@ const Modal = ({ closeModal, handleSave }) => {
                             name="nome"
                             value={formData.nome}
                             onChange={handleChange}
-                            className="border border-gray-300 rounded px-2 py-1 w-full"
+                            className="border text-black text-black border-gray-300 rounded px-2 py-1 w-full"
                         />
                     </div>
 
@@ -50,7 +62,7 @@ const Modal = ({ closeModal, handleSave }) => {
                             name="preco"
                             value={formData.preco}
                             onChange={handleChange}
-                            className="border border-gray-300 rounded px-2 py-1 w-full"
+                            className="border text-black text-black border-gray-300 rounded px-2 py-1 w-full"
                         />
                     </div>
 
@@ -64,7 +76,35 @@ const Modal = ({ closeModal, handleSave }) => {
                             name="qtdEstoque"
                             value={formData.qtdEstoque}
                             onChange={handleChange}
-                            className="border border-gray-300 rounded px-2 py-1 w-full"
+                            className="border text-black text-black border-gray-300 rounded px-2 py-1 w-full"
+                        />
+                    </div>
+
+                    <div className="mb-4">
+                        <label htmlFor="tipoValvula">Tipo de Válvula:</label>
+                        <Select
+                            className="text-black"
+                            placeholder="Selecione o tipo de válvula"
+                            id="tipoValvula"
+                            options={tipoValvulaOptions}
+                            value={tipoValvulaOptions.find(
+                                (option) => option.value === formData.tipoValvula
+                            )}
+                            onChange={handleTipoValvulaChange}
+                        />
+                    </div>
+
+                    <div className="mb-4">
+                        <label htmlFor="nome" className="block mb-1">
+                            Codigo:
+                        </label>
+                        <input
+                            type="text"
+                            id="codigo"
+                            name="codigo"
+                            value={formData.codigo}
+                            onChange={handleChange}
+                            className="border text-black border-gray-300 rounded px-2 py-1 w-full"
                         />
                     </div>
 
@@ -89,4 +129,4 @@ const Modal = ({ closeModal, handleSave }) => {
     );
 };
 
-export default Modal;
+export default ModalValvula;
