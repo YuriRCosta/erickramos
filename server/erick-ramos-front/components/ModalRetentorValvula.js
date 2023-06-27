@@ -28,7 +28,7 @@ const ModalRetentorValvula = ({ closeModal, handleSave }) => {
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
                         <label htmlFor="nome" className="block mb-1">
-                            Nome:
+                            Cabecote:
                         </label>
                         <input
                             type="text"

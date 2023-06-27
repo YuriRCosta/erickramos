@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface RetentorComandoRepository extends JpaRepository<RetentorComando, Long> {
 
-    @Query("SELECT j FROM RetentorComando j WHERE j.nome LIKE %?1%")
+    @Query("SELECT j FROM RetentorComando j WHERE lower(j.nome) LIKE lower(concat('%', ?1,'%'))")
     List<RetentorComando> buscarPorNome(String nome);
 
 }

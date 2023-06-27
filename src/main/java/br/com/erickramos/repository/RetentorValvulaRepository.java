@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface RetentorValvulaRepository extends JpaRepository<RetentorValvula, Long> {
 
-    @Query("SELECT j FROM RetentorValvula j WHERE j.nome LIKE %?1%")
+    @Query("SELECT j FROM RetentorValvula j WHERE lower(j.nome) LIKE lower(concat('%', ?1,'%'))")
     List<RetentorValvula> buscarPorNome(String nome);
 
 }

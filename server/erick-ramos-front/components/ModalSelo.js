@@ -1,9 +1,10 @@
 'use client'
 
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 
-const ModalSelo = ({ closeModal, handleSave }) => {
+const ModalSelo = ({ closeModal, handleSave, editFormData }) => {
     const [formData, setFormData] = useState({
+        id: '',
         nome: '',
         preco: '',
         medida: '',
@@ -17,9 +18,15 @@ const ModalSelo = ({ closeModal, handleSave }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const preco = parseFloat(formData.preco);
-        const qtdEstoque = parseInt(formData.qtdEstoque);// Converter o campo "preco" para número de ponto flutuante
+        const qtdEstoque = parseInt(formData.qtdEstoque);
         handleSave({ ...formData, preco, qtdEstoque });
     };
+
+    useEffect(() => {
+        if (editFormData != null) {
+            setFormData(editFormData);
+        }
+    }, [editFormData]);
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
@@ -27,9 +34,18 @@ const ModalSelo = ({ closeModal, handleSave }) => {
                 <h2 className="text-2xl font-semibold mb-4">Novo Cadastro</h2>
 
                 <form onSubmit={handleSubmit}>
+                    <input
+                        hidden={true}
+                        type="text"
+                        id="id"
+                        name="id"
+                        value={formData.id}
+                        onChange={handleChange}
+                        className="border text-black border-gray-300 rounded px-2 py-1 w-full"
+                    />
                     <div className="mb-4">
                         <label htmlFor="nome" className="block mb-1">
-                            Nome:
+                            Cabecote:
                         </label>
                         <input
                             type="text"

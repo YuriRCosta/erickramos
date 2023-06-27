@@ -18,7 +18,7 @@ const ModalValvula = ({ closeModal, handleSave }) => {
     ];
 
     const handleTipoValvulaChange = (selectedOption) => {
-        setFormData({ ...formData, tipoValvula: selectedOption.value });
+        setFormData({ ...formData, tipo: selectedOption.value });
     };
 
     const handleChange = (e) => {
@@ -40,7 +40,7 @@ const ModalValvula = ({ closeModal, handleSave }) => {
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
                         <label htmlFor="nome" className="block mb-1">
-                            Nome:
+                            Cabecote:
                         </label>
                         <input
                             type="text"
@@ -85,7 +85,7 @@ const ModalValvula = ({ closeModal, handleSave }) => {
                         <Select
                             className="text-black"
                             placeholder="Selecione o tipo de válvula"
-                            id="tipoValvula"
+                            id="tipo"
                             options={tipoValvulaOptions}
                             value={tipoValvulaOptions.find(
                                 (option) => option.value === formData.tipoValvula

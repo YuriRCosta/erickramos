@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface JuntaRepository extends JpaRepository<Junta, Long> {
 
-    @Query("SELECT j FROM Junta j WHERE j.cabecotes LIKE %?1%")
+    @Query("SELECT j FROM Junta j WHERE lower(j.cabecotes) LIKE lower(concat('%', ?1,'%'))")
     List<Junta> buscarPorNome(String nome);
 
 }

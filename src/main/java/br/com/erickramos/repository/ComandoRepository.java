@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ComandoRepository extends JpaRepository<Comando, Long> {
 
-    @Query("SELECT j FROM Comando j WHERE j.nome LIKE %?1%")
+    @Query("SELECT j FROM Comando j WHERE lower(j.nome) LIKE lower(concat('%', ?1,'%'))")
     List<Comando> buscarPorNome(String nome);
 
 }

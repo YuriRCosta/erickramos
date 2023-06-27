@@ -8,7 +8,10 @@ import java.util.List;
 
 public interface SeloRepository extends JpaRepository<Selo, Long> {
 
-    @Query("SELECT j FROM Selo j WHERE j.nome LIKE %?1%")
+    @Query("SELECT j FROM Selo j WHERE lower(j.nome) LIKE lower(concat('%', ?1,'%'))")
     List<Selo> buscarPorNome(String nome);
+
+    @Query("SELECT j FROM Selo j WHERE lower(j.medida) LIKE lower(concat('%', ?1,'%'))")
+    List<Selo> buscarPorMedida(String medida);
 
 }

@@ -62,27 +62,6 @@ const Navbar = () => {
                                         aria-labelledby="options-menu"
                                     >
                                         <Link
-                                            href="/valvula"
-                                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-                                            role="menuitem"
-                                        >
-                                            Válvulas
-                                        </Link>
-                                        <Link
-                                            href="/selo"
-                                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-                                            role="menuitem"
-                                        >
-                                            Selos
-                                        </Link>
-                                        <Link
-                                            href="/junta"
-                                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-                                            role="menuitem"
-                                        >
-                                            Juntas
-                                        </Link>
-                                        <Link
                                             href="/cabecote"
                                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                                             role="menuitem"
@@ -97,11 +76,11 @@ const Navbar = () => {
                                             Comandos
                                         </Link>
                                         <Link
-                                            href="/retentorValvula"
+                                            href="/junta"
                                             className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                                             role="menuitem"
                                         >
-                                            Retentor de Valvula
+                                            Juntas
                                         </Link>
                                         <Link
                                             href="/retentorComando"
@@ -109,6 +88,27 @@ const Navbar = () => {
                                             role="menuitem"
                                         >
                                             Retentor de Comando
+                                        </Link>
+                                        <Link
+                                            href="/retentorValvula"
+                                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                                            role="menuitem"
+                                        >
+                                            Retentor de Valvula
+                                        </Link>
+                                        <Link
+                                            href="/selo"
+                                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                                            role="menuitem"
+                                        >
+                                            Selos
+                                        </Link>
+                                        <Link
+                                            href="/valvula"
+                                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                                            role="menuitem"
+                                        >
+                                            Válvulas
                                         </Link>
                                     </div>
                                 </div>

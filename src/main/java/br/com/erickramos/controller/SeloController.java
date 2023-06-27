@@ -47,4 +47,9 @@ public class SeloController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/medida/{medida}")
+    public ResponseEntity<List<Selo>> buscarPorMedida(@PathVariable String medida) {
+        return ResponseEntity.ok(repository.buscarPorMedida(medida));
+    }
+
 }
